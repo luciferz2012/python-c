@@ -14,19 +14,23 @@ pylib_release = 'python35.lib'
 py = {
     'Debug|Win32': {
         'include_dirs': py32 + '\\include',
-        'libs': py32 + '\\libs\\' + pylib_debug
+        'libs': py32 + '\\libs\\' + pylib_debug,
+        'post_build_command': 'copy /y $(SolutionDir)data\\* $(OutDir)*'
     },
     'Release|Win32': {
         'include_dirs': py32 + '\\include',
-        'libs': py32 + '\\libs\\' + pylib_release
+        'libs': py32 + '\\libs\\' + pylib_release,
+        'post_build_command': 'copy /y $(SolutionDir)data\\* $(OutDir)*'
     },
     'Debug|x64': {
         'include_dirs': py64 + '\\include',
-        'libs': py64 + '\\libs\\' + pylib_debug
+        'libs': py64 + '\\libs\\' + pylib_debug,
+        'post_build_command': 'copy /y $(SolutionDir)data\\* $(OutDir)*'
     },
     'Release|x64': {
         'include_dirs': py64 + '\\include',
-        'libs': py64 + '\\libs\\' + pylib_release
+        'libs': py64 + '\\libs\\' + pylib_release,
+        'post_build_command': 'copy /y $(SolutionDir)data\\* $(OutDir)*'
     }
 }
 
@@ -35,3 +39,4 @@ def c2python(target):
 
 if __name__ == '__main__':
     c2python('C2Python\\C2Python.vcxproj')
+    c2python('Python2C\\Python2C.vcxproj')

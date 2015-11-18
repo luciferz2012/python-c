@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E0831202-59C9-4D38-A43D-4FE367DA9F25}</ProjectGuid>
-    <RootNamespace>C2Python</RootNamespace>
+    <ProjectGuid>{7ED752F0-7023-40BE-8630-0AFFC9DCCF89}</ProjectGuid>
+    <RootNamespace>Python2C</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -133,9 +133,6 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
   <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
 copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
 echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="my_python.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
