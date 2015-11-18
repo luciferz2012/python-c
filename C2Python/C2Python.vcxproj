@@ -80,9 +80,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>C:\Program Files (x86)\Python 3.5\libs\python35_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)great_module.py $(OutDir)great_module.py
 copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+echo Post build command is done</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -94,9 +97,12 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>C:\Program Files\Python 3.5\libs\python35_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)great_module.py $(OutDir)great_module.py
 copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+echo Post build command is done</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -112,9 +118,12 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>C:\Program Files (x86)\Python 3.5\libs\python35.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)great_module.py $(OutDir)great_module.py
 copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+echo Post build command is done</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -130,9 +139,12 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>C:\Program Files\Python 3.5\libs\python35.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)great_module.py $(OutDir)great_module.py
 copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+echo Post build command is done</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="my_python.c" />
   </ItemGroup>

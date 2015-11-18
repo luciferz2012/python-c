@@ -19,7 +19,10 @@ int great_function_from_python(int a) {
 
 int main(int argc, char *argv[]) {
     // Py_SetProgramName(argv[0]);
-    Py_Initialize(); // xxx how to set python version?
+    // Py_SetPythonHome( ... );
+    // Py_SetPath( ... );
+    // Py_GetProgramFullPath( ... );
+    Py_Initialize();
     printf("%d\n", great_function_from_python(0));
     Py_Finalize();
     system("pause");
