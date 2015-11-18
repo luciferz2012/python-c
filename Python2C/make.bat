@@ -5,9 +5,9 @@ set PyLib=python35.lib
 set Python2C=great_module
 
 call "%VS%\VC\vcvarsall.bat" amd64
-cl %Python2C%.c /I"%PyX64%\include" "%PyX64%\libs\%PyLib%" /o%Python2C%.pyd /LD
+cl %Python2C%.c /I"%PyX64%\include" "%PyX64%\libs\%PyLib%" /Fe%Python2C%.pyd /LD
 "%PyX64%\python.exe" runme.py
 
 call "%VS%\VC\vcvarsall.bat"
-cl %Python2C%.c /I"%PyX32%\include" "%PyX32%\libs\%PyLib%" /o%Python2C%.pyd /LD
+cl %Python2C%.c /I"%PyX32%\include" "%PyX32%\libs\%PyLib%" /Fe%Python2C%.pyd /LD
 "%PyX32%\python.exe" runme.py

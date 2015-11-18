@@ -5,9 +5,9 @@ set PyLib=python35.lib
 set C2Python=my_python
 
 call "%VS%\VC\vcvarsall.bat" amd64
-cl %C2Python%.c /I"%PyX64%\include" "%PyX64%\libs\%PyLib%" /o%C2Python%_x64.exe
+cl %C2Python%.c /I"%PyX64%\include" "%PyX64%\libs\%PyLib%" /Fe%C2Python%_x64.exe
 %C2Python%_x64
 
 call "%VS%\VC\vcvarsall.bat"
-cl %C2Python%.c /I"%PyX32%\include" "%PyX32%\libs\%PyLib%" /o%C2Python%_x32.exe
+cl %C2Python%.c /I"%PyX32%\include" "%PyX32%\libs\%PyLib%" /Fe%C2Python%_x32.exe
 %C2Python%_x32
