@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="great_module.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7ED752F0-7023-40BE-8630-0AFFC9DCCF89}</ProjectGuid>
     <RootNamespace>Python2C</RootNamespace>
@@ -25,26 +28,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -68,7 +71,12 @@
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetExt>.pyd</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetExt>.pyd</TargetExt>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -80,9 +88,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>C:\Program Files (x86)\Python 3.5\libs\python35_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
-copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)runme.py $(OutDir)runme.py
+"C:\Program Files (x86)\Python 3.5\python.exe" $(OutDir)runme.py
+echo Post build command is done      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -94,9 +105,12 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>C:\Program Files\Python 3.5\libs\python35_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
-copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)runme.py $(OutDir)runme.py
+"C:\Program Files\Python 3.5\python.exe" $(OutDir)runme.py
+echo Post build command is done      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -112,9 +126,12 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>C:\Program Files (x86)\Python 3.5\libs\python35.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
-copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)runme.py $(OutDir)runme.py
+"C:\Program Files (x86)\Python 3.5\python.exe" $(OutDir)runme.py
+echo Post build command is done      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -130,9 +147,12 @@ echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>C:\Program Files\Python 3.5\libs\python35.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <PostBuildEvent><Command>copy /y $(SolutionDir)data\* $(OutDir)*
-copy /y $(SolutionDir)great_module.py $(OutDir)great_module.py
-echo Post build command is done</Command></PostBuildEvent></ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>copy /y $(ProjectDir)runme.py $(OutDir)runme.py
+"C:\Program Files\Python 3.5\python.exe" $(OutDir)runme.py
+echo Post build command is done      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
