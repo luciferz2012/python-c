@@ -6,5 +6,6 @@
 %}
 /* Parse the header file to generate wrappers */
 /* %include "ifcengine.h" */
-int sdaiOpenModelBN(int repository, char* fileName, char* schemaName);
-void sdaiCloseModel(int model);
+%include "stdint.i"
+int64_t sdaiOpenModelBN(int64_t repository, char* fileName, char* schemaName);
+void sdaiCloseModel(int64_t model);
