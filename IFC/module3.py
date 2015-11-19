@@ -91,13 +91,33 @@ except AttributeError:
 
 
 
-def openModel(fileName, schemaName):
-    return _module3.openModel(fileName, schemaName)
-openModel = _module3.openModel
+def openModelBN(fileName, schemaName):
+    return _module3.openModelBN(fileName, schemaName)
+openModelBN = _module3.openModelBN
 
 def closeModel(model):
     return _module3.closeModel(model)
 closeModel = _module3.closeModel
+
+def getSPFFHeaderItem(model, itemIndex, itemSubIndex):
+    return _module3.getSPFFHeaderItem(model, itemIndex, itemSubIndex)
+getSPFFHeaderItem = _module3.getSPFFHeaderItem
+
+def getEntityExtentBN(model, entityName):
+    return _module3.getEntityExtentBN(model, entityName)
+getEntityExtentBN = _module3.getEntityExtentBN
+
+def getMemberCount(aggregate):
+    return _module3.getMemberCount(aggregate)
+getMemberCount = _module3.getMemberCount
+
+def getAggrElement(aggregate, elementIndex):
+    return _module3.getAggrElement(aggregate, elementIndex)
+getAggrElement = _module3.getAggrElement
+
+def getAttrBN(instance, attributeName):
+    return _module3.getAttrBN(instance, attributeName)
+getAttrBN = _module3.getAttrBN
 # This file is compatible with both classic and new-style classes.
 
 

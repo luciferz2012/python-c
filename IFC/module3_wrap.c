@@ -2944,16 +2944,9 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_char swig_types[0]
-#define SWIGTYPE_p_int swig_types[1]
-#define SWIGTYPE_p_long_long swig_types[2]
-#define SWIGTYPE_p_short swig_types[3]
-#define SWIGTYPE_p_signed_char swig_types[4]
-#define SWIGTYPE_p_unsigned_char swig_types[5]
-#define SWIGTYPE_p_unsigned_int swig_types[6]
-#define SWIGTYPE_p_unsigned_long_long swig_types[7]
-#define SWIGTYPE_p_unsigned_short swig_types[8]
-static swig_type_info *swig_types[10];
-static swig_module_info swig_module = {swig_types, 9, 0, 0, 0, 0};
+#define SWIGTYPE_p_long_long swig_types[1]
+static swig_type_info *swig_types[3];
+static swig_module_info swig_module = {swig_types, 2, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2986,9 +2979,6 @@ static swig_module_info swig_module = {swig_types, 9, 0, 0, 0, 0};
 
 
 #include "module1.h"
-
-
-#include <stdint.h>		// Use the C99 official header
 
 
 SWIGINTERN swig_type_info*
@@ -3259,10 +3249,42 @@ SWIG_AsVal_long_SS_long (PyObject *obj, long long *val)
   return res;
 }
 
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj((char *)(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if PY_VERSION_HEX >= 0x03010000
+      return PyUnicode_DecodeUTF8(carray, (int)(size), "surrogateescape");
+#else
+      return PyUnicode_FromStringAndSize(carray, (int)(size));
+#endif
+#else
+      return PyString_FromStringAndSize(carray, (int)(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject * 
+SWIG_FromCharPtr(const char *cptr)
+{ 
+  return SWIG_FromCharPtrAndSize(cptr, (cptr ? strlen(cptr) : 0));
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_openModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_openModelBN(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   char *arg1 = (char *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -3274,20 +3296,20 @@ SWIGINTERN PyObject *_wrap_openModel(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   int alloc2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  int64_t result;
+  intptr_t result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:openModel",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:openModelBN",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_AsCharPtrAndSize(obj0, &buf1, NULL, &alloc1);
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "openModel" "', argument " "1"" of type '" "char *""'");
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "openModelBN" "', argument " "1"" of type '" "char *""'");
   }
   arg1 = (char *)(buf1);
   res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "openModel" "', argument " "2"" of type '" "char *""'");
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "openModelBN" "', argument " "2"" of type '" "char *""'");
   }
   arg2 = (char *)(buf2);
-  result = (int64_t)openModel(arg1,arg2);
+  result = (intptr_t)openModelBN(arg1,arg2);
   resultobj = SWIG_From_long_SS_long((long long)(result));
   if (alloc1 == SWIG_NEWOBJ) free((char*)buf1);
   if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
@@ -3301,7 +3323,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_closeModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  int64_t arg1 ;
+  intptr_t arg1 ;
   long long val1 ;
   int ecode1 = 0 ;
   PyObject * obj0 = 0 ;
@@ -3309,9 +3331,9 @@ SWIGINTERN PyObject *_wrap_closeModel(PyObject *SWIGUNUSEDPARM(self), PyObject *
   if (!PyArg_ParseTuple(args,(char *)"O:closeModel",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_long_SS_long(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "closeModel" "', argument " "1"" of type '" "int64_t""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "closeModel" "', argument " "1"" of type '" "intptr_t""'");
   } 
-  arg1 = (int64_t)(val1);
+  arg1 = (intptr_t)(val1);
   closeModel(arg1);
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -3320,10 +3342,176 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_getSPFFHeaderItem(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  intptr_t arg1 ;
+  intptr_t arg2 ;
+  intptr_t arg3 ;
+  long long val1 ;
+  int ecode1 = 0 ;
+  long long val2 ;
+  int ecode2 = 0 ;
+  long long val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  char *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:getSPFFHeaderItem",&obj0,&obj1,&obj2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_long_SS_long(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "getSPFFHeaderItem" "', argument " "1"" of type '" "intptr_t""'");
+  } 
+  arg1 = (intptr_t)(val1);
+  ecode2 = SWIG_AsVal_long_SS_long(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "getSPFFHeaderItem" "', argument " "2"" of type '" "intptr_t""'");
+  } 
+  arg2 = (intptr_t)(val2);
+  ecode3 = SWIG_AsVal_long_SS_long(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "getSPFFHeaderItem" "', argument " "3"" of type '" "intptr_t""'");
+  } 
+  arg3 = (intptr_t)(val3);
+  result = (char *)getSPFFHeaderItem(arg1,arg2,arg3);
+  resultobj = SWIG_FromCharPtr((const char *)result);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getEntityExtentBN(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  intptr_t arg1 ;
+  char *arg2 = (char *) 0 ;
+  long long val1 ;
+  int ecode1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  intptr_t *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:getEntityExtentBN",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_long_SS_long(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "getEntityExtentBN" "', argument " "1"" of type '" "intptr_t""'");
+  } 
+  arg1 = (intptr_t)(val1);
+  res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "getEntityExtentBN" "', argument " "2"" of type '" "char *""'");
+  }
+  arg2 = (char *)(buf2);
+  result = (intptr_t *)getEntityExtentBN(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_long_long, 0 |  0 );
+  if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getMemberCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  intptr_t *arg1 = (intptr_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  intptr_t result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:getMemberCount",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_long_long, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getMemberCount" "', argument " "1"" of type '" "intptr_t *""'"); 
+  }
+  arg1 = (intptr_t *)(argp1);
+  result = (intptr_t)getMemberCount(arg1);
+  resultobj = SWIG_From_long_SS_long((long long)(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getAggrElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  intptr_t *arg1 = (intptr_t *) 0 ;
+  intptr_t arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  long long val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  intptr_t result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:getAggrElement",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_long_long, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getAggrElement" "', argument " "1"" of type '" "intptr_t *""'"); 
+  }
+  arg1 = (intptr_t *)(argp1);
+  ecode2 = SWIG_AsVal_long_SS_long(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "getAggrElement" "', argument " "2"" of type '" "intptr_t""'");
+  } 
+  arg2 = (intptr_t)(val2);
+  result = (intptr_t)getAggrElement(arg1,arg2);
+  resultobj = SWIG_From_long_SS_long((long long)(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getAttrBN(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  intptr_t arg1 ;
+  char *arg2 = (char *) 0 ;
+  long long val1 ;
+  int ecode1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  char *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:getAttrBN",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_long_SS_long(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "getAttrBN" "', argument " "1"" of type '" "intptr_t""'");
+  } 
+  arg1 = (intptr_t)(val1);
+  res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "getAttrBN" "', argument " "2"" of type '" "char *""'");
+  }
+  arg2 = (char *)(buf2);
+  result = (char *)getAttrBN(arg1,arg2);
+  resultobj = SWIG_FromCharPtr((const char *)result);
+  if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"openModel", _wrap_openModel, METH_VARARGS, NULL},
+	 { (char *)"openModelBN", _wrap_openModelBN, METH_VARARGS, NULL},
 	 { (char *)"closeModel", _wrap_closeModel, METH_VARARGS, NULL},
+	 { (char *)"getSPFFHeaderItem", _wrap_getSPFFHeaderItem, METH_VARARGS, NULL},
+	 { (char *)"getEntityExtentBN", _wrap_getEntityExtentBN, METH_VARARGS, NULL},
+	 { (char *)"getMemberCount", _wrap_getMemberCount, METH_VARARGS, NULL},
+	 { (char *)"getAggrElement", _wrap_getAggrElement, METH_VARARGS, NULL},
+	 { (char *)"getAttrBN", _wrap_getAttrBN, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -3331,47 +3519,19 @@ static PyMethodDef SwigMethods[] = {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_int = {"_p_int", "intptr_t *|int *|int_least32_t *|int_fast32_t *|int32_t *|int_fast16_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_long_long = {"_p_long_long", "int_least64_t *|int_fast64_t *|int64_t *|long long *|intmax_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_short = {"_p_short", "short *|int_least16_t *|int16_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_signed_char = {"_p_signed_char", "signed char *|int_least8_t *|int_fast8_t *|int8_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_unsigned_char = {"_p_unsigned_char", "unsigned char *|uint_least8_t *|uint_fast8_t *|uint8_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "uintptr_t *|uint_least32_t *|uint_fast32_t *|uint32_t *|unsigned int *|uint_fast16_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_unsigned_long_long = {"_p_unsigned_long_long", "uint_least64_t *|uint_fast64_t *|uint64_t *|unsigned long long *|uintmax_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_unsigned_short = {"_p_unsigned_short", "unsigned short *|uint_least16_t *|uint16_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_long_long = {"_p_long_long", "intptr_t *|int64_t *|long long *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
-  &_swigt__p_int,
   &_swigt__p_long_long,
-  &_swigt__p_short,
-  &_swigt__p_signed_char,
-  &_swigt__p_unsigned_char,
-  &_swigt__p_unsigned_int,
-  &_swigt__p_unsigned_long_long,
-  &_swigt__p_unsigned_short,
 };
 
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_long_long[] = {  {&_swigt__p_long_long, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_signed_char[] = {  {&_swigt__p_signed_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_unsigned_char[] = {  {&_swigt__p_unsigned_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_unsigned_long_long[] = {  {&_swigt__p_unsigned_long_long, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_unsigned_short[] = {  {&_swigt__p_unsigned_short, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
-  _swigc__p_int,
   _swigc__p_long_long,
-  _swigc__p_short,
-  _swigc__p_signed_char,
-  _swigc__p_unsigned_char,
-  _swigc__p_unsigned_int,
-  _swigc__p_unsigned_long_long,
-  _swigc__p_unsigned_short,
 };
 
 

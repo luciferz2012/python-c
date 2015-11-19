@@ -1,5 +1,6 @@
-from module3 import openModel, closeModel
+from module3 import openModelBN, closeModel, getSPFFHeaderItem
 
-id = openModel("house.ifc", "ifc2x3_tc1.exp")
+id = openModelBN("house.ifc", "ifc4.exp")
 print(id)
+print(getSPFFHeaderItem(id, 9, 0))
 closeModel(id)
